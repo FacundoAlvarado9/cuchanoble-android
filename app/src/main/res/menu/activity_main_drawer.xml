@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+<item android:title="Adopción">
+    <menu>
+        <group>
+            <item
+                android:icon="@drawable/ic_pets_black_24dp"
+                android:id="@+id/listaPerros"
+                android:title="Perros en Adopción" />
+
+            <item
+                android:icon="@drawable/ic_cloud_upload_black_24dp"
+                android:id="@+id/publicarPerro"
+                android:title="Publicar un Perro" />
+        </group>
+    </menu>
+</item>
+
+<item android:title="Información">
+    <menu>
+        <group>
+            <item
+                android:icon="@drawable/ic_gavel_black_24dp"
+                android:id="@+id/comoDenunciar"
+                android:title="Cómo Denunciar"/>
+            <item
+                android:icon="@drawable/ic_menu_law"
+                android:id="@+id/legales"
+                android:title="Legales"/>
+        </group>
+    </menu>
+</item>
+
+<item android:title="Veterinaria Municipal">
+    <menu>
+        <group>
+            <item
+                android:id="@+id/castracion"
+                android:title="Castración"/>
+            <item
+                android:id="@+id/tratamientos"
+                android:title="Tratamientos"/>
+        </group>
+    </menu>
+</item>
+
+</menu>
