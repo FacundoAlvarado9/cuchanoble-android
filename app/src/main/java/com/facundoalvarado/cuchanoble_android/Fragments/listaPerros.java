@@ -10,25 +10,42 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.facundoalvarado.cuchanoble_android.Adapter.MyAdapter;
 import com.facundoalvarado.cuchanoble_android.Model.ListItem;
 import com.facundoalvarado.cuchanoble_android.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class listaPerros extends Fragment {
+
+    private RecyclerView.Adapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_lista_perros, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewID);
-        RecyclerView.Adapter adapter;
-        List<ListItem> listItems;
+//        Variables
+        final RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewID);
+
+        final List<ListItem> listItems;
+
+        String URL = "http://cuchanoble.herokuapp.com/json.json";
 
 //        Propiedades de RV
         recyclerView.setHasFixedSize(true);
@@ -36,21 +53,51 @@ public class listaPerros extends Fragment {
 
         listItems = new ArrayList<>();
 
-        for (int i=0;i<15;i++){
-            ListItem item = new ListItem(
-                    "direccion" + (i+1),
-                    "tamano" + (i+1),
-                    "sexo" + (i+1),
-                    "edad" + (i+1),
-                    "estado" + (i+1),
-                    "contacto" + (i*100)
-            );
-            listItems.add(item);
-        }
+//        Volley Function
 
-        adapter = new MyAdapter(getActivity(), listItems);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(URL,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for (int i = 0; i<response.length(); i++) {
+                            try {
+                                JSONObject perro = response.getJSONObject(i);
+
+                                ListItem item = new ListItem(
+                                        perro.getString("direccion"),
+                                        perro.getString("tamano"),
+                                        perro.getString("sexo"),
+                                        perro.getString("edad"),
+                                        perro.getString("estado"),
+                                        perro.getString("contacto")
+                                );
+
+                                listItems.add(item);
+
+                                adapter = new MyAdapter(getActivity(), listItems);
+                                recyclerView.setAdapter(adapter);
+                                recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getActivity(), "El error es en try/catch", Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(arrayRequest);
+
+
+
 
 
         return rootView;
