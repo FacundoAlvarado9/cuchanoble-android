@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facundoalvarado.cuchanoble_android.Fragments.castracionFragment;
 import com.facundoalvarado.cuchanoble_android.Fragments.comoDenunciarFragment;
 import com.facundoalvarado.cuchanoble_android.Fragments.legalesFragment;
 import com.facundoalvarado.cuchanoble_android.Fragments.listaPerros;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.contenedor, new legalesFragment()).commit();
         } else if (id == R.id.castracion) {
             setTitle("Acerca de: Castracióm");
-            fragmentManager.beginTransaction().replace(R.id.contenedor, new legalesFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.contenedor, new castracionFragment()).commit();
         } else if (id == R.id.tratamientos) {
             setTitle("Acerca de: Tratamientos");
             fragmentManager.beginTransaction().replace(R.id.contenedor, new tratamientosFragment()).commit();
