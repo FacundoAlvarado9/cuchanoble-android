@@ -12,10 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.Cache;
+import com.android.volley.Network;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.facundoalvarado.cuchanoble_android.Adapter.MyAdapter;
@@ -41,6 +46,12 @@ public class listaPerros extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_lista_perros, container, false);
 
 //        Variables
+
+//        Seteando cache
+        Cache cache = new DiskBasedCache(getActivity().getCacheDir(),1024*1024*2);
+        Network network = new BasicNetwork(new HurlStack());
+        RequestQueue requestQueue = new RequestQueue(cache, network );
+
         final RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewID);
 
         final List<ListItem> listItems;
@@ -50,6 +61,7 @@ public class listaPerros extends Fragment {
 //        Propiedades de RV
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        requestQueue.start();
 
         listItems = new ArrayList<>();
 
@@ -93,7 +105,6 @@ public class listaPerros extends Fragment {
             }
         });
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(arrayRequest);
 
 
