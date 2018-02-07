@@ -65,7 +65,7 @@ public class listaPerros extends Fragment {
 
         listItems = new ArrayList<>();
 
-//        Volley Function
+//        Volley Function - Descargando los datos del servidor
 
         JsonArrayRequest arrayRequest = new JsonArrayRequest(URL,
                 new Response.Listener<JSONArray>() {
@@ -86,6 +86,7 @@ public class listaPerros extends Fragment {
 
                                 listItems.add(item);
 
+//                                Añadiendo los objetos al RecyclerView
                                 adapter = new MyAdapter(getActivity(), listItems);
                                 recyclerView.setAdapter(adapter);
                                 recyclerView.setItemAnimator(new DefaultItemAnimator());
