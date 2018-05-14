@@ -1,14 +1,17 @@
 package com.facundoalvarado.cuchanoble_android.Adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facundoalvarado.cuchanoble_android.Model.ListItem;
 import com.facundoalvarado.cuchanoble_android.R;
+import com.squareup.picasso.Picasso;
 
 import java.net.ConnectException;
 import java.util.List;
@@ -43,6 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         holder.edad.setText(item.getEdad());
         holder.estado.setText(item.getEstado());
         holder.contacto.setText(item.getContacto());
+        Picasso.get().load(item.getImagen()).into(holder.imagen);
 
     }
 
@@ -54,6 +58,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView direccion, tamano, sexo, edad, estado, contacto;
+        public ImageView imagen;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -64,6 +69,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             edad = (TextView) itemView.findViewById(R.id.edad);
             estado = (TextView) itemView.findViewById(R.id.estado);
             contacto = (TextView) itemView.findViewById(R.id.contacto);
+            imagen = (ImageView) itemView.findViewById(R.id.imagenPerro);
 
         }
     }

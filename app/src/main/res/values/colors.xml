@@ -7,4 +7,9 @@
     <color name="rojo">#E82C0C</color>
     <color name="blanco">#FFF</color>
     <color name="naranja">#FF530D</color>
+    <color name="primary_material_dark">#fb8c00</color>
+    <color name="primary_dark_material_dark">#cd7200</color>
+    <color name="accent_material_light">#1d00fb</color>
+    <color name="primary_material_light">#fb8c00</color>
+    <color name="primary_dark_material_light">#cf7607</color>
 </resources>

@@ -13,14 +13,18 @@ public class ListItem {
     private String edad;
     private String estado;
     private String contacto;
+    private String imagen;
 
-    public ListItem(String direccion, String tamano, String sexo, String edad, String estado, String contacto) {
+
+
+    public ListItem(String direccion, String tamano, String sexo, String edad, String estado, String contacto, String imagen) {
         this.direccion = direccion;
         this.tamano = tamano;
         this.sexo = sexo;
         this.edad = edad;
         this.estado = estado;
         this.contacto = contacto;
+        this.imagen = imagen;
     }
 
 
@@ -72,4 +76,14 @@ public class ListItem {
     public void setContacto(String contacto) {
         this.contacto = contacto;
     }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 }
+
+

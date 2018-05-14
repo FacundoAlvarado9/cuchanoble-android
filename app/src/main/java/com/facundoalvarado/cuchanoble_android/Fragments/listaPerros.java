@@ -1,6 +1,7 @@
 package com.facundoalvarado.cuchanoble_android.Fragments;
 
 import android.content.Context;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Cache;
@@ -39,11 +41,17 @@ public class listaPerros extends Fragment {
 
     private RecyclerView.Adapter adapter;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
+
+
+                // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_lista_perros, container, false);
+        //        Seteando ImageView para la imagen
+        ImageView imagenPerro = (ImageView) rootView.findViewById(R.id.imagenPerro);
 
 //        Variables
 
@@ -56,7 +64,7 @@ public class listaPerros extends Fragment {
 
         final List<ListItem> listItems;
 
-        String URL = "http://cuchanoble.herokuapp.com/json.json";
+        String URL = "http://cuchanoble.org/perros/api/?format=json";
 
 //        Propiedades de RV
         recyclerView.setHasFixedSize(true);
@@ -81,7 +89,8 @@ public class listaPerros extends Fragment {
                                         perro.getString("sexo"),
                                         perro.getString("edad"),
                                         perro.getString("estado"),
-                                        perro.getString("contacto")
+                                        perro.getString("contacto"),
+                                        perro.getString("imagen")
                                 );
 
                                 listItems.add(item);

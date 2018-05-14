@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        setTitle("Perros en Adopción");
+        setTitle("Perros Buscando Hogar");
         fragmentManager.beginTransaction().replace(R.id.contenedor, new listaPerros()).commit();
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 //        if (drawer.isDrawerOpen(GravityCompat.START)) {
